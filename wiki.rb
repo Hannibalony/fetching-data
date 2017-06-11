@@ -1,11 +1,12 @@
-require "rubygems"
-require "rest-client"
-res = RestClient.get("http://en.wikipedia.org/wiki")
-puts res.code
-#=> 200
+require 'rubygems'
+require 'rest-client'
 
-puts res.body
-#=> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-#=> "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-#=> <html lang="en" dir="ltr" class="client-nojs" xmlns="http://www.w3.org/1999/xhtml">
-#=> <head> ...
+wiki_url = "http://en.wikipedia.org/"
+file_name = "wiki-page.html"
+
+File.open(file_name, "w") { |file| file.write(RestClient.get(wiki_url)) }
+
+File.open(file_name, "read") do |word, idx|
+    puts word if word.match("Ham\.")
+    
+end 
